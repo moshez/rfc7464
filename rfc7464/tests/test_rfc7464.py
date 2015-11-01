@@ -1,6 +1,8 @@
+import json
 import unittest
 
 import rfc7464
+
 
 class TestEmit(unittest.TestCase):
 
@@ -13,8 +15,11 @@ class TestEmit(unittest.TestCase):
         self.assertEquals(res, b'\x1e"hello"\n')
 
     def test_array(self):
-        res = rfc7464.emit([1,2,3])
-        self.assertEquals(res, b'\x1e[1,2,3]\n')
+        res = rfc7464.emit([1, 2, 3])
+        self.assertEquals(res[0], b'\x1e')
+        self.assertEquals(res[-1], b'\n')
+        sdarr = json.loads(res[1:-1])
+        self.assertEquals(sdarr, [1, 2, 3])
 
     def test_object(self):
         obj = {u'hello': 5, u'world': 6}
