@@ -21,5 +21,10 @@ class Parser(object):
             if end == -1:
                 self.buffer = data[begin:]
                 break
-            yield json.loads(data[begin + 1:end].decode('utf-8'))
+            try:
+                decoded = json.loads(data[begin + 1:end].decode('utf-8'))
+            except ValueError:
+                pass
+            else:
+                yield decoded
             begin = end + 1
