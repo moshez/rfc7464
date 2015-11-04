@@ -1,5 +1,6 @@
 import json
 
+
 def emit(thing):
     return b'\x1e' + json.dumps(thing).encode('utf-8') + b'\n'
 
