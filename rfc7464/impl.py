@@ -1,9 +1,7 @@
 import json
 
-import automat
-
 def emit(thing):
-    return b'\x1e' + json.dumps(thing) + b'\n'
+    return b'\x1e' + json.dumps(thing).encode('utf-8') + b'\n'
 
 
 class Parser(object):
@@ -22,5 +20,5 @@ class Parser(object):
             if end == -1:
                 self.buffer = data[begin:]
                 break
-            yield json.loads(data[begin + 1:end])
+            yield json.loads(data[begin + 1:end].decode('utf-8'))
             begin = end + 1
