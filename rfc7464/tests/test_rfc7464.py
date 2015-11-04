@@ -28,3 +28,41 @@ class TestEmit(unittest.TestCase):
         self.assertEquals(res[-1], b'\n')
         sdobj = json.loads(res[1:-1])
         self.assertEquals(obj, sdobj)
+
+
+class TestParse(unittest.TestCase):
+
+    def setUp(self):
+        self.parser = rfc7464.Parser()
+
+    def test_some_garbage(self):
+        inp = b'1'
+        l = list(self.parser.receive(inp))
+        self.assertEquals(l, [])
+
+    def test_simple_int(self):
+        inp = b'\x1e' + b'1' + b'\n'
+        l = list(self.parser.receive(inp))
+        self.assertEquals(l, [1])
+
+    def test_simple_str(self):
+        inp = b'\x1e' + json.dumps("hello") + b'\n'
+        l = list(self.parser.receive(inp))
+        self.assertEquals(l, ["hello"])
+
+    def test_arr_dict(self):
+        inp = (b'\x1e' + json.dumps([1]) + b'\n' +
+               b'\x1e' + json.dumps({'hello': 5}) + b'\n')
+        l = list(self.parser.receive(inp))
+        self.assertEquals(l, [[1], {'hello': 5}])
+
+    def test_broken_str(self):
+        dumped = json.dumps("hello") 
+        length = len(dumped) // 2
+        part1, part2 = dumped[:length], dumped[length:]
+        inp1 = b'\x1e' + part1
+        inp2 = part2 + b'\n'
+        l = list(self.parser.receive(inp1))
+        self.assertEquals(l, [])
+        l = list(self.parser.receive(inp2))
+        self.assertEquals(l, ["hello"])
