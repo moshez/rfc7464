@@ -1,2 +1,3 @@
 include versioneer.py
 include rfc7464/_version.py
+include README.rst

@@ -1,10 +1,10 @@
 import json
 
+DELIMIT_TYPES = (type(u''), list, dict)
+
 
 def emit(thing):
     return b'\x1e' + json.dumps(thing).encode('utf-8') + b'\n'
-
-DELIMIT_TYPES = (type(u''), list, dict)
 
 
 class Parser(object):
