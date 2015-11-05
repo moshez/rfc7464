@@ -78,3 +78,9 @@ class TestParse(unittest.TestCase):
         inp = b'\x1e' + b'\xd7\xa9\xd7\x9c\xd7\x95\xd7' + b'\n'
         l = list(self.parser.receive(inp))
         self.assertEquals(l, [])
+
+    def test_good_recover(self):
+        inp = b'\x1e' + json.dumps(u"hello").encode('utf-8')
+        inp += b'\x1e' + json.dumps(u"goodbye").encode('utf-8') + b'\n'
+        l = list(self.parser.receive(inp))
+        self.assertEquals(l, [u"hello", u"goodbye"])
