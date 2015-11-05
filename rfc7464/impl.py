@@ -30,7 +30,7 @@ class Parser(object):
                 end = max_end
             try:
                 val = json.loads(data[begin + 1:end].decode('utf-8'))
-                if data[end] == '\n' or isinstance(val, DELIMIT_TYPES):
+                if data[end:end+1] == b'\n' or isinstance(val, DELIMIT_TYPES):
                     yield val
             except ValueError:
                 pass
