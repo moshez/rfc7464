@@ -12,13 +12,15 @@ The firehose of your JSON
 Introduction
 ============
 
-RFC 7464 is a proposed standard for streaming JSON documents.
+RFC 7464_ is a proposed standard for streaming JSON documents.
 It is meant to be used for things like loggers,
 which can use JSON to log structured data.
 It is designed to recover gracefully from file truncation,
 even in the middle -- such as what happens when a previous
 run crashed badly, and the next run opens the existing
 log file for appending.
+
+.. _7464: https://tools.ietf.org/html/rfc7464
 
 Contributing
 ============
