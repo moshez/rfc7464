@@ -90,3 +90,12 @@ class TestParse(unittest.TestCase):
         inp += b'\x1e' + json.dumps(u"goodbye").encode('utf-8') + b'\n'
         l = list(self.parser.receive(inp))
         self.assertEquals(l, [u"goodbye"])
+
+    def test_good_recover_in_parts(self):
+        inp = b'\x1e' + json.dumps(u"hello").encode('utf-8')
+        inp += b'\x1e' + json.dumps(u"goodbye").encode('utf-8') + b'\n'
+        for i in range(1, len(inp) - 1):
+            part1, part2 = inp[:i], inp[i:]
+            l = list(self.parser.receive(part1))
+            l.extend(self.parser.receive(part2))
+            self.assertEquals(l, [u"hello", u"goodbye"])
