@@ -4,6 +4,8 @@ import json
 def emit(thing):
     return b'\x1e' + json.dumps(thing).encode('utf-8') + b'\n'
 
+DELIMIT_TYPES = (type(u''), list, dict)
+
 
 class Parser(object):
 
@@ -27,7 +29,9 @@ class Parser(object):
                     break
                 end = max_end
             try:
-                yield json.loads(data[begin + 1:end].decode('utf-8'))
+                val = json.loads(data[begin + 1:end].decode('utf-8'))
+                if data[end] == '\n' or isinstance(val, DELIMIT_TYPES):
+                    yield val
             except ValueError:
                 pass
             begin = end
