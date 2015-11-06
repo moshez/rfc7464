@@ -33,8 +33,8 @@ def main(argv):
         for filename in filenames:
             fullname = os.path.join(dirpath, filename)
             if fullname.endswith('.pyc'):
-                pyFile = fullname[:-1]
-                if not os.path.isfile(pyFile):
+                py_file = fullname[:-1]
+                if not os.path.isfile(py_file):
                     errors += 1
                     print("Byte code file with no source:", fullname,
                           file=sys.stderr)
