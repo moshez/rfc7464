@@ -1,3 +1,6 @@
+# Copyright (c) AUTHORS
+# See LICENSE for details.
+
 from __future__ import unicode_literals
 
 import json

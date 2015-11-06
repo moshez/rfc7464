@@ -1,4 +1,4 @@
-.. Copyright (c) Moshe Zadka
+.. Copyright (c) AUTHORS
    See LICENSE for details.
 
 rfc7464

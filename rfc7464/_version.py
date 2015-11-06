@@ -1,3 +1,6 @@
+# Copyright (c) AUTHORS
+# See LICENSE for details.
+
 # flake8: noqa
 
 # This file helps to compute a version number in source trees obtained from

@@ -1,5 +1,6 @@
-# Copyright (c) Authors
+# Copyright (c) AUTHORS
 # See LICENSE for details.
+
 import setuptools
 import versioneer
 

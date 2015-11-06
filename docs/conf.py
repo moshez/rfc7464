@@ -1,5 +1,6 @@
-# Copyright (c) Moshe Zadka
+# Copyright (c) AUTHORS
 # See LICENSE for details.
+
 import os
 import sys
 

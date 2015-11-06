@@ -1,9 +1,21 @@
+# Copyright (c) AUTHORS
+# See LICENSE for details.
+
+"""
+rfc7464 -- streaming JSON
+"""
+
 import json
 
 DELIMIT_TYPES = (type(u''), list, dict)
 
 
 def emit(thing):
+    """emit an RFC 7464 record
+
+    :param thing: something that can be JSON-serialized
+    :returns: RFC 7464 record (something that can be written to a stream)
+    """
     return b'\x1e' + json.dumps(thing).encode('utf-8') + b'\n'
 
 

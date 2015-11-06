@@ -6,3 +6,5 @@ rfc7464
 
 .. toctree::
    :maxdepth: 2
+
+   api
