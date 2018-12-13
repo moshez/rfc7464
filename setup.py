@@ -21,4 +21,7 @@ setuptools.setup(
     cmdclass=versioneer.get_cmdclass(), 
     license='MIT',
     copyright='2015',
+    project_urls={  # Optional
+        'Docs': 'https://rfc7464.readthedocs.io/en/latest/',
+    },
 )
